@@ -23,7 +23,7 @@ class UrlHelper
      *
      * @see RFC 3986: https://tools.ietf.org/html/rfc3986#section-3.5
      */
-    public const FRAGMENT_IDENTIFIER_REGEX = '/^([!$&\'()*+,;=._~:@\/?-]|%[0-9a-fA-F]{2}|[a-zA-Z0-9])+$/';
+    const FRAGMENT_IDENTIFIER_REGEX = '/^([!$&\'()*+,;=._~:@\/?-]|%[0-9a-fA-F]{2}|[a-zA-Z0-9])+$/';
 
     /** @var string */
     private $basePath = '/';
@@ -54,12 +54,14 @@ class UrlHelper
      * @throws Exception\RuntimeException For attempts to use a matched result
      *     when none has been previously injected in the instance.
      * @throws InvalidArgumentException For malformed fragment identifiers.
+     * @param string|null $routeName
+     * @param string|null $fragmentIdentifier
      */
     public function __invoke(
-        ?string $routeName = null,
+        $routeName = null,
         array $routeParams = [],
         array $queryParams = [],
-        ?string $fragmentIdentifier = null,
+        $fragmentIdentifier = null,
         array $options = []
     ): string {
         $result = $this->getRouteResult();
@@ -114,13 +116,18 @@ class UrlHelper
      * Proxies to __invoke().
      *
      * @see UrlHelper::__invoke()
+     * @param string|null $routeName
+     * @param mixed[] $routeParams
+     * @param mixed[] $queryParams
+     * @param string|null $fragmentIdentifier
+     * @param mixed[] $options
      */
     public function generate(
-        ?string $routeName = null,
-        array $routeParams = [],
-        array $queryParams = [],
-        ?string $fragmentIdentifier = null,
-        array $options = []
+        $routeName = null,
+        $routeParams = [],
+        $queryParams = [],
+        $fragmentIdentifier = null,
+        $options = []
     ): string {
         return $this($routeName, $routeParams, $queryParams, $fragmentIdentifier, $options);
     }
@@ -130,34 +137,46 @@ class UrlHelper
      *
      * When the route result is injected, the helper will use it to seed default
      * parameters if the URL being generated is for the route that was matched.
+     * @param \Mezzio\Router\RouteResult $result
+     * @return void
      */
-    public function setRouteResult(RouteResult $result): void
+    public function setRouteResult($result)
     {
         $this->result = $result;
     }
 
     /**
      * Set the base path to prepend to a generated URI
+     * @param string $path
+     * @return void
      */
-    public function setBasePath(string $path): void
+    public function setBasePath($path)
     {
         $this->basePath = '/' . ltrim($path, '/');
     }
 
-    public function getRouteResult(): ?RouteResult
+    /**
+     * @return \Mezzio\Router\RouteResult|null
+     */
+    public function getRouteResult()
     {
         return $this->result;
     }
 
     /**
      * Set request instance
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @return void
      */
-    public function setRequest(ServerRequestInterface $request): void
+    public function setRequest($request)
     {
         $this->request = $request;
     }
 
-    public function getRequest(): ?ServerRequestInterface
+    /**
+     * @return \Psr\Http\Message\ServerRequestInterface|null
+     */
+    public function getRequest()
     {
         return $this->request;
     }
@@ -260,8 +279,9 @@ class UrlHelper
      * Append a fragment to a URI string, if present.
      *
      * @throws InvalidArgumentException If the fragment identifier is malformed.
+     * @param string|null $fragmentIdentifier
      */
-    private function appendFragment(string $uriString, ?string $fragmentIdentifier): string
+    private function appendFragment(string $uriString, $fragmentIdentifier): string
     {
         if ($fragmentIdentifier !== null) {
             if (! preg_match(self::FRAGMENT_IDENTIFIER_REGEX, $fragmentIdentifier)) {

@@ -20,6 +20,8 @@ class ContentLengthMiddleware implements MiddlewareInterface
 {
     /**
      * {@inheritDoc}
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Server\RequestHandlerInterface $handler
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

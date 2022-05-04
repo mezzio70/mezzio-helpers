@@ -43,16 +43,19 @@ class BodyParamsMiddleware implements MiddlewareInterface
 
     /**
      * Add a body parsing strategy to the middleware.
+     * @param \Mezzio\Helper\BodyParams\StrategyInterface $strategy
+     * @return void
      */
-    public function addStrategy(StrategyInterface $strategy): void
+    public function addStrategy($strategy)
     {
         $this->strategies[] = $strategy;
     }
 
     /**
      * Clear all strategies from the middleware.
+     * @return void
      */
-    public function clearStrategies(): void
+    public function clearStrategies()
     {
         $this->strategies = [];
     }
@@ -60,6 +63,8 @@ class BodyParamsMiddleware implements MiddlewareInterface
     /**
      * Process an incoming server request and return a response, optionally delegating
      * to the next middleware component to create the response.
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Server\RequestHandlerInterface $handler
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

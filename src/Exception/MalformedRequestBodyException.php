@@ -9,8 +9,9 @@ use InvalidArgumentException;
 
 class MalformedRequestBodyException extends InvalidArgumentException implements ExceptionInterface
 {
-    /** @param string $message */
-    public function __construct($message, ?Exception $previous = null)
+    /** @param string $message
+     * @param \Exception|null $previous */
+    public function __construct($message, $previous = null)
     {
         parent::__construct($message, 400, $previous);
     }

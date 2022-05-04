@@ -18,7 +18,10 @@ use const JSON_ERROR_NONE;
 
 class JsonStrategy implements StrategyInterface
 {
-    public function match(string $contentType): bool
+    /**
+     * @param string $contentType
+     */
+    public function match($contentType): bool
     {
         return 1 === preg_match('#^application/(|[\S]+\+)json($|[ ;])#', $contentType);
     }
@@ -27,8 +30,9 @@ class JsonStrategy implements StrategyInterface
      * {@inheritDoc}
      *
      * @throws MalformedRequestBodyException
+     * @param \Psr\Http\Message\ServerRequestInterface $request
      */
-    public function parse(ServerRequestInterface $request): ServerRequestInterface
+    public function parse($request): ServerRequestInterface
     {
         $rawBody = (string) $request->getBody();
 

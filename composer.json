@@ -1,6 +1,6 @@
 {
-    "name": "mezzio/mezzio-helpers",
-    "description": "Helper/Utility classes for Mezzio",
+    "name": "mezzio70/mezzio-helpers",
+    "description": "PHP 7.0 support for Helper/Utility classes for Mezzio",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
@@ -8,13 +8,14 @@
         "http",
         "middleware",
         "psr",
-        "psr-7"
+        "psr-7",
+        "PHP 7.0"
     ],
     "homepage": "https://mezzio.dev",
     "support": {
         "docs": "https://docs.mezzio.dev/mezzio/features/helpers/intro/",
-        "issues": "https://github.com/mezzio/mezzio-helpers/issues",
-        "source": "https://github.com/mezzio/mezzio-helpers",
+        "issues": "https://github.com/mezzio70/mezzio-helpers/issues",
+        "source": "https://github.com/mezzio70/mezzio-helpers",
         "rss": "https://github.com/mezzio/mezzio-helpers/releases.atom",
         "chat": "https://laminas.dev/chat",
         "forum": "https://discourse.laminas.dev"
@@ -26,7 +27,7 @@
             "composer/package-versions-deprecated": true
         },
         "platform": {
-            "php": "7.4.99"
+            "php": "7.0.0"
         }
     },
     "extra": {
@@ -35,21 +36,11 @@
         }
     },
     "require": {
-        "php": "^7.4 || ~8.0.0 || ~8.1.0",
-        "mezzio/mezzio-router": "^3.0",
-        "psr/container": "^1.0 || ^2.0",
+        "php": ">=7.0.0",
+        "mezzio/mezzio-router": "*",
+        "psr70/container": "dev-master",
         "psr/http-message": "^1.0.1",
         "psr/http-server-middleware": "^1.0"
-    },
-    "require-dev": {
-        "ext-json": "*",
-        "laminas/laminas-coding-standard": "~2.3.0",
-        "laminas/laminas-diactoros": "^2.5.0",
-        "mockery/mockery": "^1.4.2",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5.11",
-        "psalm/plugin-phpunit": "^0.15.1",
-        "vimeo/psalm": "^4.17"
     },
     "suggest": {
         "ext-json": "If you wish to use the JsonStrategy with BodyParamsMiddleware"

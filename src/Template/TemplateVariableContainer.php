@@ -82,13 +82,17 @@ class TemplateVariableContainer implements Countable
     /**
      * @return null|mixed Returns null if $key does not exist in container;
      *     otherwise, returns value associated with $key
+     * @param string $key
      */
-    public function get(string $key)
+    public function get($key)
     {
         return $this->variables[$key] ?? null;
     }
 
-    public function has(string $key): bool
+    /**
+     * @param string $key
+     */
+    public function has($key): bool
     {
         return array_key_exists($key, $this->variables);
     }
@@ -96,8 +100,9 @@ class TemplateVariableContainer implements Countable
     /**
      * @param mixed $value
      * @return self Returns a new instance that contains the given key/value pair
+     * @param string $key
      */
-    public function with(string $key, $value): self
+    public function with($key, $value): self
     {
         $new                  = clone $this;
         $new->variables[$key] = $value;
@@ -106,8 +111,9 @@ class TemplateVariableContainer implements Countable
 
     /**
      * @return self Returns a new instance with the given key removed.
+     * @param string $key
      */
-    public function without(string $key): self
+    public function without($key): self
     {
         $new = clone $this;
         unset($new->variables[$key]);
@@ -123,8 +129,9 @@ class TemplateVariableContainer implements Countable
      * new value if it occurs in $values.
      *
      * @return self Returns a new instance with the merged values.
+     * @param mixed[] $values
      */
-    public function merge(array $values): self
+    public function merge($values): self
     {
         $new            = clone $this;
         $new->variables = array_merge($this->variables, $values);
@@ -137,8 +144,9 @@ class TemplateVariableContainer implements Countable
      * Use this method to merge handler-specific template values with those in
      * the container in order to pass the result to the renderer's `render()`
      * method.
+     * @param mixed[] $values
      */
-    public function mergeForTemplate(array $values): array
+    public function mergeForTemplate($values): array
     {
         return array_merge($this->variables, $values);
     }

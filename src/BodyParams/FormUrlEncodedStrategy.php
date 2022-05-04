@@ -11,12 +11,18 @@ use function preg_match;
 
 class FormUrlEncodedStrategy implements StrategyInterface
 {
-    public function match(string $contentType): bool
+    /**
+     * @param string $contentType
+     */
+    public function match($contentType): bool
     {
         return 1 === preg_match('#^application/x-www-form-urlencoded($|[ ;])#', $contentType);
     }
 
-    public function parse(ServerRequestInterface $request): ServerRequestInterface
+    /**
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     */
+    public function parse($request): ServerRequestInterface
     {
         $parsedBody = $request->getParsedBody();
 

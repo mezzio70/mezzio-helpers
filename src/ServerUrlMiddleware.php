@@ -23,6 +23,8 @@ class ServerUrlMiddleware implements MiddlewareInterface
      * Inject the ServerUrlHelper instance with the request URI.
      * Injects the ServerUrlHelper with the incoming request URI, and then invoke
      * the next middleware.
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Server\RequestHandlerInterface $handler
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

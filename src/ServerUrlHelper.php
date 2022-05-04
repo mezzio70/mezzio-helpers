@@ -30,8 +30,9 @@ class ServerUrlHelper
      *
      * The $path may optionally contain the query string and/or fragment to
      * use.
+     * @param string|null $path
      */
-    public function __invoke(?string $path = null): string
+    public function __invoke($path = null): string
     {
         $path = $path ?? '';
 
@@ -54,13 +55,18 @@ class ServerUrlHelper
      * Generate a path relative to the current request URI.
      *
      * Proxies to __invoke().
+     * @param string|null $path
      */
-    public function generate(?string $path = null): string
+    public function generate($path = null): string
     {
         return $this($path);
     }
 
-    public function setUri(UriInterface $uri): void
+    /**
+     * @param \Psr\Http\Message\UriInterface $uri
+     * @return void
+     */
+    public function setUri($uri)
     {
         $this->uri = $uri;
     }

@@ -15,11 +15,13 @@ interface StrategyInterface
      * Match the content type to the strategy criteria.
      *
      * @return bool Whether or not the strategy matches.
+     * @param string $contentType
      */
-    public function match(string $contentType): bool;
+    public function match($contentType): bool;
 
     /**
      * Parse the body content and return a new request.
+     * @param \Psr\Http\Message\ServerRequestInterface $request
      */
-    public function parse(ServerRequestInterface $request): ServerRequestInterface;
+    public function parse($request): ServerRequestInterface;
 }
